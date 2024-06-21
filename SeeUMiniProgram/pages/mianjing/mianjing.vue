@@ -1,82 +1,124 @@
 <template>
   <view class="container">
-    <!-- <view class="search-bar">
-          <uni-input v-model="searchQuery" placeholder="search mianjing resource" class="search-input" />
-          <view class="search-icon" @click="search">
-            <image src="/static/logo.png" mode="widthFix" class="icon-image" />
-			<!-- <uni-icons type="search" size="20" color='blue'></uni-icons> -->
-			<!-- <uni-icons fontFamily="CustomFont" :size="26">{{'\uebc6'}}</uni-icons> -->
-         <!-- </view>
-    </view> --> -->
-<!-- 	<uni-section title="自定义样式" subTitle="使用 bgColor 属性自定义背景色" type="line">
-				<uni-search-bar placeholder="自定义背景色" bgColor="#EEEEEE" @confirm="search" /> -->
-	<!-- </uni-section> -->
-    <view class="tabs">
-      <view :class="['tab', activeTab === 'job' ? 'active' : '']" @click="setActiveTab('job')">求职</view>
-      <view :class="['tab', activeTab === 'study' ? 'active' : '']" @click="setActiveTab('study')">申研</view>
+    <view class="search-bar">
+      <view class="dropdown" @tap="toggleDropdown">
+        <text>{{ selectedOption }}</text>
+		<uni-icons type="up" class="arrow-up"/>
+      </view>
+      <view v-if="showDropdown" class="dropdown-menu">
+        <view v-for="(option, index) in options" :key="index" class="dropdown-item" @tap="selectOption(option)">
+          <text :class="{'selected': option === selectedOption}">{{ option }}</text>
+        </view>
+      </view>
+      <input class="search-input" type="text" placeholder="搜索面经资料" v-model="searchQuery" />
+      <button class	="search-button" @tap="onSearch">
+        <uni-icons type="search" color="#ffffff" size="25"/>
+      </button>
     </view>
   </view>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
       searchQuery: '',
-      activeTab: 'job'
+      selectedOption: '按公司',
+      options: ['按公司', '按岗位', '按专业', '按学校'],
+      showDropdown: false,
     };
   },
   methods: {
-    search() {
-      // Implement search functionality here
-      console.log('Searching for:', this.searchQuery);
+    toggleDropdown() {
+      this.showDropdown = !this.showDropdown;
     },
-    setActiveTab(tab) {
-      this.activeTab = tab;
-    }
-  }
+    selectOption(option) {
+      this.selectedOption = option;
+      this.showDropdown = false;
+    },
+    onSearch() {
+      // Handle search logic here
+      console.log('Search query:', this.searchQuery, 'Selected option:', this.selectedOption);
+    },
+  },
 };
 </script>
 
-<style scoped>
+<style>
 .container {
-  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the top */
+  padding-top: 20px; /* Space from the top of the screen */
+  height: 100vh;
+  background-color: #f5f5f5;
 }
+
 .search-bar {
   display: flex;
   align-items: center;
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  padding: 5px;
+  width: 90%;
+  height: 40px;
+  background-color: #e0e0e0; /* Set to grey */
+  /* border: 1px solid #ccc; */
+  border-radius: 5px;
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+  position: relative;
 }
-uni-input {
-  flex: 1;
-  background-color: transparent;
-  border: none;
-  padding: 10px;
-}
-.search-icon {
-  padding: 10px;
-  cursor: pointer;
-}
-.icon-image {
-  width: 20px;
-  height: 20px;
-}
-.tabs {
+
+.dropdown {
   display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-.tab {
-  flex: 1;
-  text-align: center;
-  padding: 10px 0;
+  align-items: center;
+  padding: 0 10px;
   cursor: pointer;
-  border-bottom: 2px solid transparent;
 }
-.tab.active {
-  border-bottom: 2px solid blue;
-  font-weight: bold;
+
+.arrow-up {
+  margin-left: 5px;
 }
+
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.dropdown-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.selected {
+  color: #4285f4;
+}
+
+.search-input {
+  flex: 1;
+  height: 100%;
+  padding: 0 10px;
+  border: none;
+  outline: none;
+}
+
+.search-button {
+  width: 40px;
+  height: 40px;
+  background-color: #4285f4;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 5px 5px 0;
+}
+
 </style>
