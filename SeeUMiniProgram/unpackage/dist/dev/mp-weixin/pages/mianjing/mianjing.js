@@ -6,11 +6,22 @@ const _sfc_main = {
       searchQuery: "",
       selectedOption: "按公司",
       options: ["按公司", "按岗位", "按专业", "按学校"],
-      showDropdown: false
+      showDropdown: false,
+      activeTab: "jobs",
+      dropdowns: {
+        location: false,
+        position: false,
+        industry: false
+      },
+      filters: {
+        location: null,
+        position: null,
+        industry: null
+      }
     };
   },
   methods: {
-    toggleDropdown() {
+    searchToggleDropdown() {
       this.showDropdown = !this.showDropdown;
     },
     selectOption(option) {
@@ -19,6 +30,21 @@ const _sfc_main = {
     },
     onSearch() {
       console.log("Search query:", this.searchQuery, "Selected option:", this.selectedOption);
+    },
+    selectTab(tab) {
+      this.activeTab = tab;
+    },
+    toggleDropdown(type) {
+      this.dropdowns[type] = !this.dropdowns[type];
+      for (let key in this.dropdowns) {
+        if (key !== type) {
+          this.dropdowns[key] = false;
+        }
+      }
+    },
+    filterBy(type, value) {
+      this.filters[type] = value;
+      this.dropdowns[type] = false;
     }
   }
 };
@@ -36,7 +62,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     b: common_vendor.p({
       type: "up"
     }),
-    c: common_vendor.o((...args) => $options.toggleDropdown && $options.toggleDropdown(...args)),
+    c: common_vendor.o((...args) => $options.searchToggleDropdown && $options.searchToggleDropdown(...args)),
     d: $data.showDropdown
   }, $data.showDropdown ? {
     e: common_vendor.f($data.options, (option, index, i0) => {
@@ -55,8 +81,25 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       color: "#ffffff",
       size: "25"
     }),
-    i: common_vendor.o((...args) => $options.onSearch && $options.onSearch(...args))
-  });
+    i: common_vendor.o((...args) => $options.onSearch && $options.onSearch(...args)),
+    j: $data.activeTab === "jobs" ? 1 : "",
+    k: common_vendor.o(($event) => $options.selectTab("jobs")),
+    l: $data.activeTab === "study" ? 1 : "",
+    m: common_vendor.o(($event) => $options.selectTab("study")),
+    n: $data.activeTab === "jobs"
+  }, $data.activeTab === "jobs" ? common_vendor.e({
+    o: $data.dropdowns.location ? 1 : "",
+    p: $data.dropdowns.location
+  }, $data.dropdowns.location ? {
+    q: common_vendor.o(($event) => $options.filterBy("location", "all")),
+    r: common_vendor.o(($event) => $options.filterBy("location", "internship"))
+  } : {}, {
+    s: common_vendor.o(($event) => $options.toggleDropdown("location")),
+    t: $data.dropdowns.position ? 1 : "",
+    v: common_vendor.o(($event) => $options.toggleDropdown("position")),
+    w: $data.dropdowns.industry ? 1 : "",
+    x: common_vendor.o(($event) => $options.toggleDropdown("industry"))
+  }) : {});
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/yil224/Documents/HBuilderProjects/SeeUMiniProgram/pages/mianjing/mianjing.vue"]]);
 wx.createPage(MiniProgramPage);

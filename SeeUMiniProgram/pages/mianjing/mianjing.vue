@@ -1,9 +1,9 @@
 <template>
   <view class="container">
     <view class="search-bar">
-      <view class="dropdown" @tap="toggleDropdown">
+      <view class="search-dropdown" @tap="searchToggleDropdown">
         <text>{{ selectedOption }}</text>
-		<uni-icons type="up" class="arrow-up"/>
+        <uni-icons type="up" class="arrow-up"/>
       </view>
       <view v-if="showDropdown" class="dropdown-menu">
         <view v-for="(option, index) in options" :key="index" class="dropdown-item" @tap="selectOption(option)">
@@ -11,15 +11,38 @@
         </view>
       </view>
       <input class="search-input" type="text" placeholder="搜索面经资料" v-model="searchQuery" />
-      <button class	="search-button" @tap="onSearch">
+      <button class="search-button" @tap="onSearch">
         <uni-icons type="search" color="#ffffff" size="25"/>
       </button>
+    </view>
+    <view class="tabs">
+      <view class="tab" :class="{ active: activeTab === 'jobs' }" @tap="selectTab('jobs')">求职</view>
+      <view class="tab" :class="{ active: activeTab === 'study' }" @tap="selectTab('study')">申研</view>
+    </view>
+    <view v-if="activeTab === 'jobs'" class="filters">
+      <view class="filter" @tap="toggleDropdown('location')">
+        求职地域
+        <text :class="{ open: dropdowns.location }">▲</text>
+        <view v-if="dropdowns.location" class="dropdown">
+          <view @tap="filterBy('location', 'all')">全部</view>
+          <view @tap="filterBy('location', 'internship')">实习</view>
+        </view>
+      </view>
+      <view class="filter" @tap="toggleDropdown('position')">
+        岗位类别
+        <text :class="{ open: dropdowns.position }">▲</text>
+        <!-- Add dropdown content here -->
+      </view>
+      <view class="filter" @tap="toggleDropdown('industry')">
+        所属行业
+        <text :class="{ open: dropdowns.industry }">▼</text>
+        <!-- Add dropdown content here -->
+      </view>
     </view>
   </view>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -27,10 +50,21 @@ export default {
       selectedOption: '按公司',
       options: ['按公司', '按岗位', '按专业', '按学校'],
       showDropdown: false,
+      activeTab: 'jobs',
+      dropdowns: {
+        location: false,
+        position: false,
+        industry: false,
+      },
+      filters: {
+        location: null,
+        position: null,
+        industry: null,
+      },
     };
   },
   methods: {
-    toggleDropdown() {
+    searchToggleDropdown() {
       this.showDropdown = !this.showDropdown;
     },
     selectOption(option) {
@@ -41,6 +75,21 @@ export default {
       // Handle search logic here
       console.log('Search query:', this.searchQuery, 'Selected option:', this.selectedOption);
     },
+    selectTab(tab) {
+      this.activeTab = tab;
+    },
+    toggleDropdown(type) {
+      this.dropdowns[type] = !this.dropdowns[type];
+      for (let key in this.dropdowns) {
+        if (key !== type) {
+          this.dropdowns[key] = false;
+        }
+      }
+    },
+    filterBy(type, value) {
+      this.filters[type] = value;
+      this.dropdowns[type] = false;
+    },
   },
 };
 </script>
@@ -48,9 +97,9 @@ export default {
 <style>
 .container {
   display: flex;
-  justify-content: center;
-  align-items: flex-start; /* Align items to the top */
-  padding-top: 20px; /* Space from the top of the screen */
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
   height: 100vh;
   background-color: #f5f5f5;
 }
@@ -60,14 +109,13 @@ export default {
   align-items: center;
   width: 90%;
   height: 40px;
-  background-color: #e0e0e0; /* Set to grey */
-  /* border: 1px solid #ccc; */
+  background-color: #e0e0e0;
   border-radius: 5px;
-  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
   position: relative;
+  margin-bottom: 10px;
 }
 
-.dropdown {
+.search-dropdown {
   display: flex;
   align-items: center;
   padding: 0 10px;
@@ -82,7 +130,7 @@ export default {
   position: absolute;
   top: 50px;
   left: 0;
-  width: 100px;
+  width: 80px;
   background-color: #ffffff;
   border: 1px solid #ccc;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -121,4 +169,61 @@ export default {
   border-radius: 0 5px 5px 0;
 }
 
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.tab.active {
+  color: blue;
+  border-bottom: 2px solid blue;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.filter {
+  position: relative;
+  cursor: pointer;
+}
+
+.filter text {
+  margin-left: 5px;
+}
+
+.filter text.open {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  width: 100px;
+}
+
+.dropdown view {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.dropdown view:hover {
+  background: #f0f0f0;
+}
 </style>
