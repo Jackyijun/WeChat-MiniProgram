@@ -22,7 +22,7 @@
     <view v-if="activeTab === 'jobs'" class="filters">
       <view class="filter" @tap="toggleDropdown('location')">
         求职地域
-        <text :class="{ open: dropdowns.location }">▲</text>
+        <uni-icons :class="{ open: dropdowns.location }" type="down" class="arrow-down"/>
         <view v-if="dropdowns.location" class="dropdown">
           <view @tap="filterBy('location', 'all')">全部</view>
           <view @tap="filterBy('location', 'internship')">实习</view>
@@ -30,12 +30,12 @@
       </view>
       <view class="filter" @tap="toggleDropdown('position')">
         岗位类别
-        <text :class="{ open: dropdowns.position }">▲</text>
+        <uni-icons :class="{ open: dropdowns.position }" type="down" class="arrow-down"/>
         <!-- Add dropdown content here -->
       </view>
       <view class="filter" @tap="toggleDropdown('industry')">
         所属行业
-        <text :class="{ open: dropdowns.industry }">▼</text>
+        <uni-icons :class="{ open: dropdowns.industry }" type="down" class="arrow-down"/>
         <!-- Add dropdown content here -->
       </view>
     </view>
@@ -112,7 +112,7 @@ export default {
   background-color: #e0e0e0;
   border-radius: 5px;
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .search-dropdown {
@@ -124,6 +124,10 @@ export default {
 
 .arrow-up {
   margin-left: 5px;
+}
+
+.arrow-down {
+  margin-left: -7px;
 }
 
 .dropdown-menu {
@@ -172,25 +176,26 @@ export default {
 .tabs {
   display: flex;
   justify-content: space-around;
-  border-bottom: 1px solid #ddd;
-  width: 100%;
+  /* border-bottom: 1px solid #ddd; */
+  width: 80%;
 }
 
 .tab {
+  font-weight: bold;
   padding: 10px 20px;
   cursor: pointer;
 }
 
 .tab.active {
-  color: blue;
-  border-bottom: 2px solid blue;
+  border-bottom: 5px solid #4285f4;
 }
 
 .filters {
   display: flex;
   justify-content: space-around;
   padding: 10px 0;
-  width: 100%;
+  width: 90%;
+  border-top: 1px solid #ddd;
 }
 
 .filter {

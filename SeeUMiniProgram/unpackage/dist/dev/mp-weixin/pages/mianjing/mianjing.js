@@ -89,16 +89,25 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     n: $data.activeTab === "jobs"
   }, $data.activeTab === "jobs" ? common_vendor.e({
     o: $data.dropdowns.location ? 1 : "",
-    p: $data.dropdowns.location
+    p: common_vendor.p({
+      type: "down"
+    }),
+    q: $data.dropdowns.location
   }, $data.dropdowns.location ? {
-    q: common_vendor.o(($event) => $options.filterBy("location", "all")),
-    r: common_vendor.o(($event) => $options.filterBy("location", "internship"))
+    r: common_vendor.o(($event) => $options.filterBy("location", "all")),
+    s: common_vendor.o(($event) => $options.filterBy("location", "internship"))
   } : {}, {
-    s: common_vendor.o(($event) => $options.toggleDropdown("location")),
-    t: $data.dropdowns.position ? 1 : "",
-    v: common_vendor.o(($event) => $options.toggleDropdown("position")),
-    w: $data.dropdowns.industry ? 1 : "",
-    x: common_vendor.o(($event) => $options.toggleDropdown("industry"))
+    t: common_vendor.o(($event) => $options.toggleDropdown("location")),
+    v: $data.dropdowns.position ? 1 : "",
+    w: common_vendor.p({
+      type: "down"
+    }),
+    x: common_vendor.o(($event) => $options.toggleDropdown("position")),
+    y: $data.dropdowns.industry ? 1 : "",
+    z: common_vendor.p({
+      type: "down"
+    }),
+    A: common_vendor.o(($event) => $options.toggleDropdown("industry"))
   }) : {});
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/yil224/Documents/HBuilderProjects/SeeUMiniProgram/pages/mianjing/mianjing.vue"]]);
