@@ -100,13 +100,13 @@
 .dropdown {
   position: absolute;
   top: 100%;
-  left: 0;
+  /* left: 0; */
   background: #fff;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   list-style: none;
   padding: 5px 0;
   margin: 0;
-  width: 100px;
+  width: 100%;
 }
 .dropdown view {
   padding: 5px 10px;

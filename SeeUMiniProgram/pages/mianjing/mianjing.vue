@@ -24,7 +24,7 @@
         求职地域
         <uni-icons :class="{ open: dropdowns.location }" type="down" class="arrow-down"/>
         <view v-if="dropdowns.location" class="dropdown">
-          <view @tap="filterBy('location', 'all')">全部</view>
+          <view @tap="filterBy('location', 'all')">全职</view>
           <view @tap="filterBy('location', 'internship')">实习</view>
         </view>
       </view>
@@ -214,13 +214,13 @@ export default {
 .dropdown {
   position: absolute;
   top: 100%;
-  left: 0;
+  /* left: 0; */
   background: #fff;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   list-style: none;
   padding: 5px 0;
   margin: 0;
-  width: 100px;
+  width: 100%;
 }
 
 .dropdown view {
