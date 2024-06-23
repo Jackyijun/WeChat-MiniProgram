@@ -15,11 +15,14 @@
         <uni-icons type="search" color="#ffffff" size="25"/>
       </button>
     </view>
+	
+	<!-- Tabs 求职 申研 -->
     <view class="tabs">
       <view class="tab" :class="{ active: activeTab === 'jobs' }" @tap="selectTab('jobs')">求职</view>
       <view class="tab" :class="{ active: activeTab === 'study' }" @tap="selectTab('study')">申研</view>
     </view>
-    <view v-if="activeTab === 'jobs'" class="filters">
+	<!-- Filters -->
+    <view class="filters">
       <view class="filter" @tap="toggleDropdown('location')">
         求职地域
         <uni-icons :class="{ open: dropdowns.location }" type="down" class="arrow-down"/>
@@ -37,6 +40,22 @@
         所属行业
         <uni-icons :class="{ open: dropdowns.industry }" type="down" class="arrow-down"/>
         <!-- Add dropdown content here -->
+      </view>
+    </view>
+	
+	<!-- Bottom Navigation Bar -->
+    <view class="bottom-nav">
+      <view class="nav-item" @tap="navigate('home')">
+        <uni-icons type="home" size="25"/>
+        <text>首页</text>
+      </view>
+      <view class="nav-item" @tap="navigate('info')" :class="{ active: activeNav === 'info' }">
+        <uni-icons type="help" size="25", color="#4285f4"/>
+        <text>信息</text>
+      </view>
+      <view class="nav-item" @tap="navigate('profile')">
+        <uni-icons type="person" size="25"/>
+        <text>个人中心</text>
       </view>
     </view>
   </view>
@@ -61,6 +80,7 @@ export default {
         position: null,
         industry: null,
       },
+      activeNav: 'info', // Set the active navigation item
     };
   },
   methods: {
@@ -89,6 +109,11 @@ export default {
     filterBy(type, value) {
       this.filters[type] = value;
       this.dropdowns[type] = false;
+    },
+    navigate(page) {
+      this.activeNav = page;
+      // Handle navigation logic here
+      console.log('Navigating to:', page);
     },
   },
 };
@@ -134,7 +159,7 @@ export default {
   position: absolute;
   top: 50px;
   left: 0;
-  width: 80px;
+  width: 100%;
   background-color: #ffffff;
   border: 1px solid #ccc;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -231,4 +256,33 @@ export default {
 .dropdown view:hover {
   background: #f0f0f0;
 }
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: #ffffff;
+  border-top: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nav-item text {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.nav-item.active uni-icons,
+.nav-item.active text {
+  color: #4285f4;
+}
+
 </style>

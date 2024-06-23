@@ -17,7 +17,9 @@ const _sfc_main = {
         location: null,
         position: null,
         industry: null
-      }
+      },
+      activeNav: "info"
+      // Set the active navigation item
     };
   },
   methods: {
@@ -45,6 +47,10 @@ const _sfc_main = {
     filterBy(type, value) {
       this.filters[type] = value;
       this.dropdowns[type] = false;
+    },
+    navigate(page) {
+      this.activeNav = page;
+      console.log("Navigating to:", page);
     }
   }
 };
@@ -86,29 +92,45 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     k: common_vendor.o(($event) => $options.selectTab("jobs")),
     l: $data.activeTab === "study" ? 1 : "",
     m: common_vendor.o(($event) => $options.selectTab("study")),
-    n: $data.activeTab === "jobs"
-  }, $data.activeTab === "jobs" ? common_vendor.e({
-    o: $data.dropdowns.location ? 1 : "",
-    p: common_vendor.p({
+    n: $data.dropdowns.location ? 1 : "",
+    o: common_vendor.p({
       type: "down"
     }),
-    q: $data.dropdowns.location
+    p: $data.dropdowns.location
   }, $data.dropdowns.location ? {
-    r: common_vendor.o(($event) => $options.filterBy("location", "all")),
-    s: common_vendor.o(($event) => $options.filterBy("location", "internship"))
+    q: common_vendor.o(($event) => $options.filterBy("location", "all")),
+    r: common_vendor.o(($event) => $options.filterBy("location", "internship"))
   } : {}, {
-    t: common_vendor.o(($event) => $options.toggleDropdown("location")),
-    v: $data.dropdowns.position ? 1 : "",
-    w: common_vendor.p({
+    s: common_vendor.o(($event) => $options.toggleDropdown("location")),
+    t: $data.dropdowns.position ? 1 : "",
+    v: common_vendor.p({
       type: "down"
     }),
-    x: common_vendor.o(($event) => $options.toggleDropdown("position")),
-    y: $data.dropdowns.industry ? 1 : "",
-    z: common_vendor.p({
+    w: common_vendor.o(($event) => $options.toggleDropdown("position")),
+    x: $data.dropdowns.industry ? 1 : "",
+    y: common_vendor.p({
       type: "down"
     }),
-    A: common_vendor.o(($event) => $options.toggleDropdown("industry"))
-  }) : {});
+    z: common_vendor.o(($event) => $options.toggleDropdown("industry")),
+    A: common_vendor.p({
+      type: "home",
+      size: "25"
+    }),
+    B: common_vendor.o(($event) => $options.navigate("home")),
+    C: common_vendor.p({
+      type: "help",
+      size: "25",
+      [","]: true,
+      color: "#4285f4"
+    }),
+    D: common_vendor.o(($event) => $options.navigate("info")),
+    E: $data.activeNav === "info" ? 1 : "",
+    F: common_vendor.p({
+      type: "person",
+      size: "25"
+    }),
+    G: common_vendor.o(($event) => $options.navigate("profile"))
+  });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/yil224/Documents/HBuilderProjects/SeeUMiniProgram/pages/mianjing/mianjing.vue"]]);
 wx.createPage(MiniProgramPage);

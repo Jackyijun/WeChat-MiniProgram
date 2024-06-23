@@ -33,7 +33,7 @@
   position: absolute;
   top: 50px;
   left: 0;
-  width: 80px;
+  width: 100%;
   background-color: #ffffff;
   border: 1px solid #ccc;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -115,3 +115,28 @@
 .dropdown view:hover {
   background: #f0f0f0;
 }
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: #ffffff;
+  border-top: 1px solid #ddd;
+  padding: 10px 0;
+}
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+.nav-item text {
+  margin-top: 5px;
+  font-size: 12px;
+}
+.nav-item.active uni-icons,
+.nav-item.active text {
+  color: #4285f4;
+}
+
