@@ -1,6 +1,6 @@
 <template>
-  <view class="card">
-    <image class="card-image" :src="image" />
+  <view class="card" @click="openPdf(file)">
+    <image class="card-image" :src="image"/>
     <view class="card-content">
       <view class="card-title">{{ title }}</view>
       <view class="card-subtitle">{{ subtitle }}</view>
@@ -20,7 +20,14 @@ export default {
     subtitle: String,
     tag: String,
     views: Number,
+	file: String,
   },
+  methods: {
+	  openPdf() {
+	        this.$emit('open-pdf', this.file);
+	      }
+  },
+	
 };
 </script>
 
@@ -30,6 +37,7 @@ export default {
   padding: 10px;
   width: 100%;
   border-bottom: 1px solid #eee;
+  cursor: pointer; /* Add pointer cursor to indicate clickable */
 }
 
 .card-image {

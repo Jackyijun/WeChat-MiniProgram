@@ -11,7 +11,13 @@
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
-		}
+		},
+		{
+			"path": "pages/pdf-viewer/pdf-viewer",
+			"style": {
+			"navigationBarTitleText": "PDF Viewer"
+		  }
+	    }
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

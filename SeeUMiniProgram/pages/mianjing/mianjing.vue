@@ -55,6 +55,8 @@
 			:subtitle="item.subtitle"
 			:tag="item.tag"
 			:views="item.views"
+			:file="item.file"
+			@open-pdf="openPdf(item.file)"
 		  />
 	  </scroll-view>
 	</view>
@@ -70,6 +72,8 @@
 					:subtitle="item.subtitle"
 					:tag="item.tag"
 					:views="item.views"
+					:file="item.file"
+					@open-pdf="openPdf"
 				  />
 		</scroll-view>
 	</view>
@@ -154,6 +158,13 @@ export default {
       // Handle navigation logic here
       console.log('Navigating to:', page);
     },
+	openPdf(file) {
+		console.log(file);
+		console.log(encodeURIComponent(file.path));
+	    uni.navigateTo({
+	      url: `/pages/pdf-viewer/pdf-viewer?filePath=${encodeURIComponent(file.path)}`
+        });
+	},
   },
 };
 </script>

@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/mianjing/mianjing",
-    "pages/index/index"
+    "pages/index/index",
+    "pages/pdf-viewer/pdf-viewer"
   ],
   "window": {
     "navigationBarTextStyle": "black",

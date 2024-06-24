@@ -5,6 +5,7 @@ const company_list =  [
 	subtitle: 'Software Engineer',
 	tag: '全职',
 	views: 2344,
+	file: '/backend/pdfs/google.pdf',
   },
   {
 	image: '/static/tiktok.png',
@@ -12,6 +13,7 @@ const company_list =  [
 	subtitle: 'Senior Data Scientist',
 	tag: '实习',
 	views: 3452,
+	file: '/backend/pdfs/tiktok.pdf',
   },
   {
 	image: '/static/meta.png',
@@ -19,34 +21,39 @@ const company_list =  [
 	subtitle: 'Software Engineer',
 	tag: '实习',
 	views: 4697,
+	file: '/backend/pdfs/meta.pdf',
   },
   {
-	image: '/static/meta.png',
-	title: 'Meta面经',
-	subtitle: 'Software Engineer',
-	tag: '实习',
-	views: 4697,
+  	image: '/static/meta.png',
+  	title: 'Meta面经',
+  	subtitle: 'Software Engineer',
+  	tag: '实习',
+  	views: 4697,
+  	file: '/backend/pdfs/meta.pdf',
   },
   {
-	image: '/static/meta.png',
-	title: 'Meta面经',
-	subtitle: 'Software Engineer',
-	tag: '实习',
-	views: 4697,
+  	image: '/static/meta.png',
+  	title: 'Meta面经',
+  	subtitle: 'Software Engineer',
+  	tag: '实习',
+  	views: 4697,
+  	file: '/backend/pdfs/meta.pdf',
   },
   {
-	image: '/static/meta.png',
-	title: 'Meta面经',
-	subtitle: 'Software Engineer',
-	tag: '实习',
-	views: 4697,
+  	image: '/static/meta.png',
+  	title: 'Meta面经',
+  	subtitle: 'Software Engineer',
+  	tag: '实习',
+  	views: 4697,
+  	file: '/backend/pdfs/meta.pdf',
   },
   {
-	image: '/static/meta.png',
-	title: 'Meta面经',
-	subtitle: 'Software Engineer',
-	tag: '实习',
-	views: 4697,
+  	image: '/static/meta.png',
+  	title: 'Meta面经',
+  	subtitle: 'Software Engineer',
+  	tag: '实习',
+  	views: 4697,
+  	file: '/backend/pdfs/meta.pdf',
   },
   {
   	image: '/static/google.png',
@@ -54,6 +61,7 @@ const company_list =  [
   	subtitle: 'Software Engineer',
   	tag: '全职',
   	views: 2344,
+	file: '/backend/pdfs/google.pdf',
   },
   // Add more items as needed
 ];
@@ -64,6 +72,7 @@ const university_list =  [
 	subtitle: '经济学',
 	// tag: '全职',
 	views: 2344,
+	file: '/backend/pdfs/nyu.pdf',
   },
   {
 	image: '/static/toronto.png',
@@ -71,6 +80,7 @@ const university_list =  [
 	subtitle: '心理学',
 	// tag: '实习',
 	views: 3452,
+	file: '/backend/pdfs/toronto.pdf',
   },
   {
 	image: '/static/columbia.png',
@@ -78,6 +88,7 @@ const university_list =  [
 	subtitle: '应用分析学',
 	// tag: '实习',
 	views: 4697,
+	file: '/backend/pdfs/columbia.pdf',
   },
   {
   	image: '/static/nyu.png',
@@ -85,6 +96,7 @@ const university_list =  [
   	subtitle: '经济学',
   	// tag: '全职',
   	views: 2344,
+	file: '/backend/pdfs/nyu.pdf',
   },
   {
   	image: '/static/toronto.png',
@@ -92,6 +104,7 @@ const university_list =  [
   	subtitle: '心理学',
   	// tag: '实习',
   	views: 3452,
+	file: '/backend/pdfs/toronto.pdf',
   },
   {
   	image: '/static/columbia.png',
@@ -99,6 +112,7 @@ const university_list =  [
   	subtitle: '应用分析学',
   	// tag: '实习',
   	views: 4697,
+	file: '/backend/pdfs/columbia.pdf',
   },
   // Add more items as needed
 ];

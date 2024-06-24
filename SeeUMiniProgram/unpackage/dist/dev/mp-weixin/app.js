@@ -4,6 +4,7 @@ const common_vendor = require("./common/vendor.js");
 if (!Math) {
   "./pages/mianjing/mianjing.js";
   "./pages/index/index.js";
+  "./pages/pdf-viewer/pdf-viewer.js";
 }
 const _sfc_main = {
   onLaunch: function() {

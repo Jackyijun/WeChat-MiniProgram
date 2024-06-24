@@ -6,7 +6,13 @@ const _sfc_main = {
     title: String,
     subtitle: String,
     tag: String,
-    views: Number
+    views: Number,
+    file: String
+  },
+  methods: {
+    openPdf() {
+      this.$emit("open-pdf", this.file);
+    }
   }
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -18,7 +24,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   }, $props.tag ? {
     e: common_vendor.t($props.tag)
   } : {}, {
-    f: common_vendor.t($props.views)
+    f: common_vendor.t($props.views),
+    g: common_vendor.o(($event) => $options.openPdf($props.file))
   });
 }
 const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-cc328a3d"], ["__file", "/Users/yil224/Documents/HBuilderProjects/SeeUMiniProgram/components/card.vue"]]);

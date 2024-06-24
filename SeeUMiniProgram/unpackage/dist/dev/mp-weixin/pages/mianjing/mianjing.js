@@ -1,6 +1,6 @@
 "use strict";
-const components_card_data = require("../../components/card_data.js");
 const common_vendor = require("../../common/vendor.js");
+const components_card_data = require("../../components/card_data.js");
 const card = () => "../../components/card.js";
 const _sfc_main = {
   components: {
@@ -58,6 +58,13 @@ const _sfc_main = {
     navigate(page) {
       this.activeNav = page;
       console.log("Navigating to:", page);
+    },
+    openPdf(file) {
+      console.log(file);
+      console.log(encodeURIComponent(file.path));
+      common_vendor.index.navigateTo({
+        url: `/pages/pdf-viewer/pdf-viewer?filePath=${encodeURIComponent(file.path)}`
+      });
     }
   }
 };
@@ -125,13 +132,15 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     B: common_vendor.f($data.company_list, (item, index, i0) => {
       return {
         a: index,
-        b: "6c338c78-5-" + i0,
-        c: common_vendor.p({
+        b: common_vendor.o(($event) => $options.openPdf(item.file), index),
+        c: "6c338c78-5-" + i0,
+        d: common_vendor.p({
           image: item.image,
           title: item.title,
           subtitle: item.subtitle,
           tag: item.tag,
-          views: item.views
+          views: item.views,
+          file: item.file
         })
       };
     })
@@ -141,13 +150,15 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     D: common_vendor.f($data.university_list, (item, index, i0) => {
       return {
         a: index,
-        b: "6c338c78-6-" + i0,
-        c: common_vendor.p({
+        b: common_vendor.o($options.openPdf, index),
+        c: "6c338c78-6-" + i0,
+        d: common_vendor.p({
           image: item.image,
           title: item.title,
           subtitle: item.subtitle,
           tag: item.tag,
-          views: item.views
+          views: item.views,
+          file: item.file
         })
       };
     })
