@@ -1,6 +1,11 @@
 "use strict";
+const components_card_data = require("../../components/card_data.js");
 const common_vendor = require("../../common/vendor.js");
+const card = () => "../../components/card.js";
 const _sfc_main = {
+  components: {
+    card
+  },
   data() {
     return {
       searchQuery: "",
@@ -18,8 +23,10 @@ const _sfc_main = {
         position: null,
         industry: null
       },
-      activeNav: "info"
+      activeNav: "info",
       // Set the active navigation item
+      company_list: components_card_data.company_list,
+      university_list: components_card_data.university_list
     };
   },
   methods: {
@@ -56,7 +63,8 @@ const _sfc_main = {
 };
 if (!Array) {
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
-  _easycom_uni_icons2();
+  const _component_card = common_vendor.resolveComponent("card");
+  (_easycom_uni_icons2 + _component_card)();
 }
 const _easycom_uni_icons = () => "../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
 if (!Math) {
@@ -112,24 +120,56 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       type: "down"
     }),
     z: common_vendor.o(($event) => $options.toggleDropdown("industry")),
-    A: common_vendor.p({
+    A: $data.activeTab === "jobs"
+  }, $data.activeTab === "jobs" ? {
+    B: common_vendor.f($data.company_list, (item, index, i0) => {
+      return {
+        a: index,
+        b: "6c338c78-5-" + i0,
+        c: common_vendor.p({
+          image: item.image,
+          title: item.title,
+          subtitle: item.subtitle,
+          tag: item.tag,
+          views: item.views
+        })
+      };
+    })
+  } : {}, {
+    C: $data.activeTab === "study"
+  }, $data.activeTab === "study" ? {
+    D: common_vendor.f($data.university_list, (item, index, i0) => {
+      return {
+        a: index,
+        b: "6c338c78-6-" + i0,
+        c: common_vendor.p({
+          image: item.image,
+          title: item.title,
+          subtitle: item.subtitle,
+          tag: item.tag,
+          views: item.views
+        })
+      };
+    })
+  } : {}, {
+    E: common_vendor.p({
       type: "home",
       size: "25"
     }),
-    B: common_vendor.o(($event) => $options.navigate("home")),
-    C: common_vendor.p({
+    F: common_vendor.o(($event) => $options.navigate("home")),
+    G: common_vendor.p({
       type: "help",
       size: "25",
       [","]: true,
       color: "#4285f4"
     }),
-    D: common_vendor.o(($event) => $options.navigate("info")),
-    E: $data.activeNav === "info" ? 1 : "",
-    F: common_vendor.p({
+    H: common_vendor.o(($event) => $options.navigate("info")),
+    I: $data.activeNav === "info" ? 1 : "",
+    J: common_vendor.p({
       type: "person",
       size: "25"
     }),
-    G: common_vendor.o(($event) => $options.navigate("profile"))
+    K: common_vendor.o(($event) => $options.navigate("profile"))
   });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/yil224/Documents/HBuilderProjects/SeeUMiniProgram/pages/mianjing/mianjing.vue"]]);

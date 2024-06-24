@@ -43,6 +43,37 @@
       </view>
     </view>
 	
+	<!-- 面经s -->
+	<!-- 求职面经 -->
+	<view v-if="activeTab === 'jobs'" class="mianjings">
+	  <scroll-view class="card-list" scroll-y>
+		  <card
+			v-for="(item, index) in company_list"
+			:key="index"
+			:image="item.image"
+			:title="item.title"
+			:subtitle="item.subtitle"
+			:tag="item.tag"
+			:views="item.views"
+		  />
+	  </scroll-view>
+	</view>
+	
+	<!-- 考研面经 -->
+	<view v-if="activeTab === 'study'" class="mianjings">
+		<scroll-view class="card-list" scroll-y>
+				  <card
+					v-for="(item, index) in university_list"
+					:key="index"
+					:image="item.image"
+					:title="item.title"
+					:subtitle="item.subtitle"
+					:tag="item.tag"
+					:views="item.views"
+				  />
+		</scroll-view>
+	</view>
+	
 	<!-- Bottom Navigation Bar -->
     <view class="bottom-nav">
       <view class="nav-item" @tap="navigate('home')">
@@ -62,7 +93,13 @@
 </template>
 
 <script>
+import card from '/components/card.vue';
+import { company_list, university_list } from '/components/card_data.js';
+
 export default {
+  components: {
+	card,
+  },
   data() {
     return {
       searchQuery: '',
@@ -81,6 +118,8 @@ export default {
         industry: null,
       },
       activeNav: 'info', // Set the active navigation item
+	  company_list,
+	  university_list,
     };
   },
   methods: {
@@ -283,6 +322,11 @@ export default {
 .nav-item.active uni-icons,
 .nav-item.active text {
   color: #4285f4;
+}
+
+.mianjings {
+	/* margin: 0; */
+	width: 95%;
 }
 
 </style>

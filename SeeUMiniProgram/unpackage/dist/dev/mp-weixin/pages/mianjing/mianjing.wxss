@@ -139,4 +139,8 @@
 .nav-item.active text {
   color: #4285f4;
 }
+.mianjings {
+	/* margin: 0; */
+	width: 95%;
+}
 
