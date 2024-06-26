@@ -81,7 +81,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return common_vendor.e({
     a: common_vendor.t($data.selectedOption),
     b: common_vendor.p({
-      type: "up"
+      type: $data.showDropdown ? "up" : "down"
     }),
     c: common_vendor.o((...args) => $options.searchToggleDropdown && $options.searchToggleDropdown(...args)),
     d: $data.showDropdown
@@ -107,31 +107,28 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     k: common_vendor.o(($event) => $options.selectTab("jobs")),
     l: $data.activeTab === "study" ? 1 : "",
     m: common_vendor.o(($event) => $options.selectTab("study")),
-    n: $data.dropdowns.location ? 1 : "",
-    o: common_vendor.p({
-      type: "down"
+    n: common_vendor.p({
+      type: $data.dropdowns.location ? "up" : "down"
     }),
-    p: common_vendor.o(($event) => $options.toggleDropdown("location")),
-    q: $data.dropdowns.position ? 1 : "",
-    r: common_vendor.p({
-      type: "down"
+    o: common_vendor.o(($event) => $options.toggleDropdown("location")),
+    p: common_vendor.p({
+      type: $data.dropdowns.position ? "up" : "down"
     }),
-    s: $data.dropdowns.position
+    q: $data.dropdowns.position
   }, $data.dropdowns.position ? {
-    t: common_vendor.o(($event) => $options.filterBy("position", "fulltime")),
-    v: $data.filters.position === "fulltime" ? 1 : "",
-    w: common_vendor.o(($event) => $options.filterBy("position", "internship")),
-    x: $data.filters.position === "internship" ? 1 : ""
+    r: common_vendor.o(($event) => $options.filterBy("position", "fulltime")),
+    s: $data.filters.position === "fulltime" ? 1 : "",
+    t: common_vendor.o(($event) => $options.filterBy("position", "internship")),
+    v: $data.filters.position === "internship" ? 1 : ""
   } : {}, {
-    y: common_vendor.o(($event) => $options.toggleDropdown("position")),
-    z: $data.dropdowns.industry ? 1 : "",
-    A: common_vendor.p({
-      type: "down"
+    w: common_vendor.o(($event) => $options.toggleDropdown("position")),
+    x: common_vendor.p({
+      type: $data.dropdowns.industry ? "up" : "down"
     }),
-    B: common_vendor.o(($event) => $options.toggleDropdown("industry")),
-    C: $data.activeTab === "jobs"
+    y: common_vendor.o(($event) => $options.toggleDropdown("industry")),
+    z: $data.activeTab === "jobs"
   }, $data.activeTab === "jobs" ? {
-    D: common_vendor.f($data.company_list, (item, index, i0) => {
+    A: common_vendor.f($data.company_list, (item, index, i0) => {
       return {
         a: index,
         b: common_vendor.o(($event) => $options.openPdf(item.file), index),
@@ -147,9 +144,9 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       };
     })
   } : {}, {
-    E: $data.activeTab === "study"
+    B: $data.activeTab === "study"
   }, $data.activeTab === "study" ? {
-    F: common_vendor.f($data.university_list, (item, index, i0) => {
+    C: common_vendor.f($data.university_list, (item, index, i0) => {
       return {
         a: index,
         b: common_vendor.o($options.openPdf, index),
@@ -165,24 +162,24 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       };
     })
   } : {}, {
-    G: common_vendor.p({
+    D: common_vendor.p({
       type: "home",
       size: "25"
     }),
-    H: common_vendor.o(($event) => $options.navigate("home")),
-    I: common_vendor.p({
+    E: common_vendor.o(($event) => $options.navigate("home")),
+    F: common_vendor.p({
       type: "help",
       size: "25",
       [","]: true,
       color: "#4285f4"
     }),
-    J: common_vendor.o(($event) => $options.navigate("info")),
-    K: $data.activeNav === "info" ? 1 : "",
-    L: common_vendor.p({
+    G: common_vendor.o(($event) => $options.navigate("info")),
+    H: $data.activeNav === "info" ? 1 : "",
+    I: common_vendor.p({
       type: "person",
       size: "25"
     }),
-    M: common_vendor.o(($event) => $options.navigate("profile"))
+    J: common_vendor.o(($event) => $options.navigate("profile"))
   });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/yil224/Documents/HBuilderProjects/SeeUMiniProgram/pages/mianjing/mianjing.vue"]]);

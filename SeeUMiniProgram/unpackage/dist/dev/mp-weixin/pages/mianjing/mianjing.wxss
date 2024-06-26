@@ -23,10 +23,10 @@
   padding: 0 10px;
   cursor: pointer;
 }
-.arrow-up {
+.arrow-search {
   margin-left: 5px;
 }
-.arrow-down {
+.arrow-filter {
   margin-left: -7px;
 }
 .dropdown-menu {

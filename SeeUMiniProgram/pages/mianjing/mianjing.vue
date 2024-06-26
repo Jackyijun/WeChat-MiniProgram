@@ -3,7 +3,7 @@
     <view class="search-bar">
       <view class="search-dropdown" @tap="searchToggleDropdown">
         <text>{{ selectedOption }}</text>
-        <uni-icons type="up" class="arrow-up"/>
+        <uni-icons :type="showDropdown ? 'up' : 'down'" class="arrow-search"/>
       </view>
       <view v-if="showDropdown" class="dropdown-menu">
         <view v-for="(option, index) in options" :key="index" class="dropdown-item" @tap="selectOption(option)">
@@ -25,12 +25,12 @@
     <view class="filters">
       <view class="filter" @tap="toggleDropdown('location')">
         求职地域
-        <uni-icons :class="{ open: dropdowns.location }" type="down" class="arrow-down"/>
+        <uni-icons :type="dropdowns.location ? 'up' : 'down'" class="arrow-filter"/>
 		<!-- Add dropdown content here -->
       </view>
       <view class="filter" @tap="toggleDropdown('position')">
         岗位类别
-        <uni-icons :class="{ open: dropdowns.position }" type="down" class="arrow-down"/>
+        <uni-icons :type="dropdowns.position ? 'up' : 'down'" class="arrow-filter"/>
 		<view v-if="dropdowns.position" class="filter-dropdown-position">
 		  <view @tap="filterBy('position', 'fulltime')" :class="{'selected': filters.position === 'fulltime', 'filter-dropdown-item1': true}">全职</view>
 		  <view @tap="filterBy('position', 'internship')" :class="{'selected': filters.position === 'internship'}">实习</view>
@@ -38,7 +38,7 @@
       </view>
       <view class="filter" @tap="toggleDropdown('industry')">
         所属行业
-        <uni-icons :class="{ open: dropdowns.industry }" type="down" class="arrow-down"/>
+        <uni-icons :type="dropdowns.industry ? 'up' : 'down'" class="arrow-filter"/>
         <!-- Add dropdown content here -->
       </view>
     </view>
@@ -197,11 +197,11 @@ export default {
   cursor: pointer;
 }
 
-.arrow-up {
+.arrow-search {
   margin-left: 5px;
 }
 
-.arrow-down {
+.arrow-filter {
   margin-left: -7px;
 }
 
