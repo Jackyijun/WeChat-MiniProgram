@@ -209,7 +209,7 @@ export default {
   position: absolute;
   top: 50px;
   left: 0;
-  width: 100%;
+  width: 25%;
   background-color: #ffffff;
   border: 1px solid #ccc;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -219,6 +219,7 @@ export default {
 .dropdown-item {
   padding: 10px;
   border-bottom: 1px solid #eee;
+  text-align: center;
 }
 
 .dropdown-item:last-child {
