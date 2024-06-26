@@ -26,7 +26,7 @@
       <view class="filter" @tap="toggleDropdown('location')">
         求职地域
         <uni-icons :class="{ open: dropdowns.location }" type="down" class="arrow-down"/>
-        <view v-if="dropdowns.location" class="dropdown">
+        <view v-if="dropdowns.location" class="filter-dropdown">
           <view @tap="filterBy('location', 'all')">全职</view>
           <view @tap="filterBy('location', 'internship')">实习</view>
         </view>
@@ -212,6 +212,7 @@ export default {
   width: 25%;
   background-color: #ffffff;
   border: 1px solid #ccc;
+  border-radius: 5px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   z-index: 10;
 }
@@ -287,24 +288,24 @@ export default {
   transform: rotate(180deg);
 }
 
-.dropdown {
+.filter-dropdown {
   position: absolute;
   top: 100%;
-  /* left: 0; */
+  left: -40%;
   background: #fff;
-  /* border: 1px solid #ddd; */
   list-style: none;
   padding: 5px 0;
   margin: 0;
-  width: 100%;
+  width: 800%;
+  z-index: 10; /* place filter's dropdown above other elements*/
 }
 
-.dropdown view {
+.filter-dropdown view {
   padding: 5px 10px;
   cursor: pointer;
 }
 
-.dropdown view:hover {
+.filter-dropdown view:hover {
   background: #f0f0f0;
 }
 
