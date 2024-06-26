@@ -111,25 +111,27 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     o: common_vendor.p({
       type: "down"
     }),
-    p: $data.dropdowns.location
-  }, $data.dropdowns.location ? {
-    q: common_vendor.o(($event) => $options.filterBy("location", "all")),
-    r: common_vendor.o(($event) => $options.filterBy("location", "internship"))
+    p: common_vendor.o(($event) => $options.toggleDropdown("location")),
+    q: $data.dropdowns.position ? 1 : "",
+    r: common_vendor.p({
+      type: "down"
+    }),
+    s: $data.dropdowns.position
+  }, $data.dropdowns.position ? {
+    t: common_vendor.o(($event) => $options.filterBy("position", "fulltime")),
+    v: $data.filters.position === "fulltime" ? 1 : "",
+    w: common_vendor.o(($event) => $options.filterBy("position", "internship")),
+    x: $data.filters.position === "internship" ? 1 : ""
   } : {}, {
-    s: common_vendor.o(($event) => $options.toggleDropdown("location")),
-    t: $data.dropdowns.position ? 1 : "",
-    v: common_vendor.p({
+    y: common_vendor.o(($event) => $options.toggleDropdown("position")),
+    z: $data.dropdowns.industry ? 1 : "",
+    A: common_vendor.p({
       type: "down"
     }),
-    w: common_vendor.o(($event) => $options.toggleDropdown("position")),
-    x: $data.dropdowns.industry ? 1 : "",
-    y: common_vendor.p({
-      type: "down"
-    }),
-    z: common_vendor.o(($event) => $options.toggleDropdown("industry")),
-    A: $data.activeTab === "jobs"
+    B: common_vendor.o(($event) => $options.toggleDropdown("industry")),
+    C: $data.activeTab === "jobs"
   }, $data.activeTab === "jobs" ? {
-    B: common_vendor.f($data.company_list, (item, index, i0) => {
+    D: common_vendor.f($data.company_list, (item, index, i0) => {
       return {
         a: index,
         b: common_vendor.o(($event) => $options.openPdf(item.file), index),
@@ -145,9 +147,9 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       };
     })
   } : {}, {
-    C: $data.activeTab === "study"
+    E: $data.activeTab === "study"
   }, $data.activeTab === "study" ? {
-    D: common_vendor.f($data.university_list, (item, index, i0) => {
+    F: common_vendor.f($data.university_list, (item, index, i0) => {
       return {
         a: index,
         b: common_vendor.o($options.openPdf, index),
@@ -163,24 +165,24 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       };
     })
   } : {}, {
-    E: common_vendor.p({
+    G: common_vendor.p({
       type: "home",
       size: "25"
     }),
-    F: common_vendor.o(($event) => $options.navigate("home")),
-    G: common_vendor.p({
+    H: common_vendor.o(($event) => $options.navigate("home")),
+    I: common_vendor.p({
       type: "help",
       size: "25",
       [","]: true,
       color: "#4285f4"
     }),
-    H: common_vendor.o(($event) => $options.navigate("info")),
-    I: $data.activeNav === "info" ? 1 : "",
-    J: common_vendor.p({
+    J: common_vendor.o(($event) => $options.navigate("info")),
+    K: $data.activeNav === "info" ? 1 : "",
+    L: common_vendor.p({
       type: "person",
       size: "25"
     }),
-    K: common_vendor.o(($event) => $options.navigate("profile"))
+    M: common_vendor.o(($event) => $options.navigate("profile"))
   });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/yil224/Documents/HBuilderProjects/SeeUMiniProgram/pages/mianjing/mianjing.vue"]]);

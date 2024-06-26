@@ -26,15 +26,15 @@
       <view class="filter" @tap="toggleDropdown('location')">
         求职地域
         <uni-icons :class="{ open: dropdowns.location }" type="down" class="arrow-down"/>
-        <view v-if="dropdowns.location" class="filter-dropdown">
-          <view @tap="filterBy('location', 'all')">全职</view>
-          <view @tap="filterBy('location', 'internship')">实习</view>
-        </view>
+		<!-- Add dropdown content here -->
       </view>
       <view class="filter" @tap="toggleDropdown('position')">
         岗位类别
         <uni-icons :class="{ open: dropdowns.position }" type="down" class="arrow-down"/>
-        <!-- Add dropdown content here -->
+		<view v-if="dropdowns.position" class="filter-dropdown-position">
+		  <view @tap="filterBy('position', 'fulltime')" :class="{'selected': filters.position === 'fulltime', 'filter-dropdown-item1': true}">全职</view>
+		  <view @tap="filterBy('position', 'internship')" :class="{'selected': filters.position === 'internship'}">实习</view>
+		</view>
       </view>
       <view class="filter" @tap="toggleDropdown('industry')">
         所属行业
@@ -176,7 +176,7 @@ export default {
   align-items: center;
   padding-top: 20px;
   height: 100vh;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
 }
 
 .search-bar {
@@ -184,7 +184,7 @@ export default {
   align-items: center;
   width: 90%;
   height: 40px;
-  background-color: #e0e0e0;
+  background-color: #F2F3F5;
   border-radius: 5px;
   position: relative;
   margin-bottom: 5px;
@@ -288,11 +288,11 @@ export default {
   transform: rotate(180deg);
 }
 
-.filter-dropdown {
+.filter-dropdown-position {
   position: absolute;
   top: 100%;
-  left: -40%;
-  background: #fff;
+  left: -170%;
+  background: #ffffff;
   list-style: none;
   padding: 5px 0;
   margin: 0;
@@ -300,13 +300,17 @@ export default {
   z-index: 10; /* place filter's dropdown above other elements*/
 }
 
-.filter-dropdown view {
+.filter-dropdown-position view {
   padding: 5px 10px;
   cursor: pointer;
 }
 
-.filter-dropdown view:hover {
+.filter-dropdown-position view:hover {
   background: #f0f0f0;
+}
+
+.filter-dropdown-item1{
+	border-bottom: 1px solid #eee;
 }
 
 .bottom-nav {
