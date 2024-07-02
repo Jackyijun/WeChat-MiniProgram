@@ -16,12 +16,18 @@ const _sfc_main = {
       dropdowns: {
         location: false,
         position: false,
-        industry: false
+        industry: false,
+        studyLocation: false,
+        university: false,
+        major: false
       },
       filters: {
         location: null,
         position: null,
-        industry: null
+        industry: null,
+        studyLocation: null,
+        university: null,
+        major: null
       },
       activeNav: "info",
       // Set the active navigation item
@@ -112,32 +118,50 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     k: common_vendor.o(($event) => $options.selectTab("jobs")),
     l: $data.activeTab === "study" ? 1 : "",
     m: common_vendor.o(($event) => $options.selectTab("study")),
-    n: common_vendor.p({
+    n: $data.activeTab === "jobs"
+  }, $data.activeTab === "jobs" ? common_vendor.e({
+    o: common_vendor.p({
       type: $data.dropdowns.location ? "up" : "down"
     }),
-    o: common_vendor.o(($event) => $options.toggleDropdown("location")),
-    p: common_vendor.p({
+    p: common_vendor.o(($event) => $options.toggleDropdown("location")),
+    q: common_vendor.p({
       type: $data.dropdowns.position ? "up" : "down"
     }),
-    q: $data.dropdowns.position
+    r: $data.dropdowns.position
   }, $data.dropdowns.position ? {
-    r: common_vendor.o(($event) => $options.filterBy("position", "fulltime")),
-    s: $data.filters.position === "fulltime" ? 1 : "",
-    t: common_vendor.o(($event) => $options.filterBy("position", "internship")),
-    v: $data.filters.position === "internship" ? 1 : ""
+    s: common_vendor.o(($event) => $options.filterBy("position", "fulltime")),
+    t: $data.filters.position === "fulltime" ? 1 : "",
+    v: common_vendor.o(($event) => $options.filterBy("position", "internship")),
+    w: $data.filters.position === "internship" ? 1 : ""
   } : {}, {
-    w: common_vendor.o(($event) => $options.toggleDropdown("position")),
-    x: common_vendor.p({
+    x: common_vendor.o(($event) => $options.toggleDropdown("position")),
+    y: common_vendor.p({
       type: $data.dropdowns.industry ? "up" : "down"
     }),
-    y: common_vendor.o(($event) => $options.toggleDropdown("industry")),
-    z: $data.activeTab === "jobs"
+    z: common_vendor.o(($event) => $options.toggleDropdown("industry"))
+  }) : {}, {
+    A: $data.activeTab === "study"
+  }, $data.activeTab === "study" ? {
+    B: common_vendor.p({
+      type: $data.dropdowns.studyLocation ? "up" : "down"
+    }),
+    C: common_vendor.o(($event) => $options.toggleDropdown("studyLocation")),
+    D: common_vendor.p({
+      type: $data.dropdowns.university ? "up" : "down"
+    }),
+    E: common_vendor.o(($event) => $options.toggleDropdown("university")),
+    F: common_vendor.p({
+      type: $data.dropdowns.major ? "up" : "down"
+    }),
+    G: common_vendor.o(($event) => $options.toggleDropdown("major"))
+  } : {}, {
+    H: $data.activeTab === "jobs"
   }, $data.activeTab === "jobs" ? {
-    A: common_vendor.f($data.company_list, (item, index, i0) => {
+    I: common_vendor.f($data.company_list, (item, index, i0) => {
       return {
         a: index,
         b: common_vendor.o(($event) => $options.openPdf(item.file), index),
-        c: "6c338c78-5-" + i0,
+        c: "6c338c78-8-" + i0,
         d: common_vendor.p({
           image: item.image,
           title: item.title,
@@ -149,13 +173,13 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       };
     })
   } : {}, {
-    B: $data.activeTab === "study"
+    J: $data.activeTab === "study"
   }, $data.activeTab === "study" ? {
-    C: common_vendor.f($data.university_list, (item, index, i0) => {
+    K: common_vendor.f($data.university_list, (item, index, i0) => {
       return {
         a: index,
         b: common_vendor.o($options.openPdf, index),
-        c: "6c338c78-6-" + i0,
+        c: "6c338c78-9-" + i0,
         d: common_vendor.p({
           image: item.image,
           title: item.title,
@@ -167,24 +191,24 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       };
     })
   } : {}, {
-    D: common_vendor.p({
+    L: common_vendor.p({
       type: "home",
       size: "25"
     }),
-    E: common_vendor.o(($event) => $options.navigate("home")),
-    F: common_vendor.p({
+    M: common_vendor.o(($event) => $options.navigate("home")),
+    N: common_vendor.p({
       type: "help",
       size: "25",
       [","]: true,
       color: "#4285f4"
     }),
-    G: common_vendor.o(($event) => $options.navigate("info")),
-    H: $data.activeNav === "info" ? 1 : "",
-    I: common_vendor.p({
+    O: common_vendor.o(($event) => $options.navigate("info")),
+    P: $data.activeNav === "info" ? 1 : "",
+    Q: common_vendor.p({
       type: "person",
       size: "25"
     }),
-    J: common_vendor.o(($event) => $options.navigate("profile"))
+    R: common_vendor.o(($event) => $options.navigate("profile"))
   });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/yil224/Documents/HBuilderProjects/SeeUMiniProgram/pages/mianjing/mianjing.vue"]]);

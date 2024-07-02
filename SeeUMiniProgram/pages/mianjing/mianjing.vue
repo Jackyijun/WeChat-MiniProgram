@@ -21,29 +21,51 @@
       <view class="tab" :class="{ active: activeTab === 'jobs' }" @tap="selectTab('jobs')">求职</view>
       <view class="tab" :class="{ active: activeTab === 'study' }" @tap="selectTab('study')">申研</view>
     </view>
-	<!-- Filters -->
-    <view class="filters">
-      <view class="filter" @tap="toggleDropdown('location')">
-        求职地域
-        <uni-icons :type="dropdowns.location ? 'up' : 'down'" class="arrow-filter"/>
+	
+	<!-- Filters Part -->
+	<!-- Filters for 求职 -->
+	<view v-if="activeTab === 'jobs'" class="filters">
+	  <view class="filter" @tap="toggleDropdown('location')">
+		求职地域
+		<uni-icons :type="dropdowns.location ? 'up' : 'down'" class="arrow-filter"/>
 		<!-- Add dropdown content here -->
-      </view>
-      <view class="filter" @tap="toggleDropdown('position')">
-        岗位类别
-        <uni-icons :type="dropdowns.position ? 'up' : 'down'" class="arrow-filter"/>
+	  </view>
+	  <view class="filter" @tap="toggleDropdown('position')">
+		岗位类别
+		<uni-icons :type="dropdowns.position ? 'up' : 'down'" class="arrow-filter"/>
 		<view v-if="dropdowns.position" class="filter-dropdown-position">
 		  <view @tap="filterBy('position', 'fulltime')" :class="{'selected': filters.position === 'fulltime', 'filter-dropdown-item1': true}">全职</view>
 		  <view @tap="filterBy('position', 'internship')" :class="{'selected': filters.position === 'internship'}">实习</view>
 		</view>
-      </view>
-      <view class="filter" @tap="toggleDropdown('industry')">
-        所属行业
-        <uni-icons :type="dropdowns.industry ? 'up' : 'down'" class="arrow-filter"/>
-        <!-- Add dropdown content here -->
-      </view>
-    </view>
+	  </view>
+	  <view class="filter" @tap="toggleDropdown('industry')">
+		所属行业
+		<uni-icons :type="dropdowns.industry ? 'up' : 'down'" class="arrow-filter"/>
+		<!-- Add dropdown content here -->
+	  </view>
+	</view>
 	
-	<!-- 面经s -->
+	<!-- Filters for 申研 -->
+	<view v-if="activeTab === 'study'" class="filters">
+	  <view class="filter" @tap="toggleDropdown('studyLocation')">
+		申研地域
+		<uni-icons :type="dropdowns.studyLocation ? 'up' : 'down'" class="arrow-filter"/>
+		<!-- Add dropdown content here -->
+	  </view>
+	  <view class="filter" @tap="toggleDropdown('university')">
+		所属院校
+		<uni-icons :type="dropdowns.university ? 'up' : 'down'" class="arrow-filter"/>
+		<!-- Add dropdown content here -->
+	  </view>
+	  <view class="filter" @tap="toggleDropdown('major')">
+		所属专业
+		<uni-icons :type="dropdowns.major ? 'up' : 'down'" class="arrow-filter"/>
+		<!-- Add dropdown content here -->
+	  </view>
+	</view>
+	
+	
+	<!-- 面经s Main Content (Scrollable)-->
 	<!-- 求职面经 -->
 	<view v-if="activeTab === 'jobs'" class="mianjings">
 	  <scroll-view class="card-list" scroll-y>
@@ -113,13 +135,19 @@ export default {
       activeTab: 'jobs',
       dropdowns: {
         location: false,
-        position: false,
-        industry: false,
+		position: false,
+		industry: false,
+		studyLocation: false,
+		university: false,
+		major: false,
       },
       filters: {
         location: null,
-        position: null,
-        industry: null,
+		position: null,
+		industry: null,
+		studyLocation: null,
+		university: null,
+		major: null,
       },
       activeNav: 'info', // Set the active navigation item
 	  company_list,
