@@ -35,6 +35,17 @@ const _sfc_main = {
       university_list: components_card_data.university_list
     };
   },
+  computed: {
+    filteredCompanyList() {
+      if (this.filters.position) {
+        return this.company_list.filter((item) => item.tag === this.filters.position);
+      }
+      return this.company_list;
+    },
+    filteredUniversityList() {
+      return this.university_list;
+    }
+  },
   methods: {
     searchToggleDropdown() {
       this.showDropdown = !this.showDropdown;
@@ -129,10 +140,10 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     r: $data.dropdowns.position
   }, $data.dropdowns.position ? {
-    s: common_vendor.o(($event) => $options.filterBy("position", "fulltime")),
-    t: $data.filters.position === "fulltime" ? 1 : "",
-    v: common_vendor.o(($event) => $options.filterBy("position", "internship")),
-    w: $data.filters.position === "internship" ? 1 : ""
+    s: common_vendor.o(($event) => $options.filterBy("position", "全职")),
+    t: $data.filters.position === "全职" ? 1 : "",
+    v: common_vendor.o(($event) => $options.filterBy("position", "实习")),
+    w: $data.filters.position === "实习" ? 1 : ""
   } : {}, {
     x: common_vendor.o(($event) => $options.toggleDropdown("position")),
     y: common_vendor.p({
@@ -157,7 +168,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   } : {}, {
     H: $data.activeTab === "jobs"
   }, $data.activeTab === "jobs" ? {
-    I: common_vendor.f($data.company_list, (item, index, i0) => {
+    I: common_vendor.f($options.filteredCompanyList, (item, index, i0) => {
       return {
         a: index,
         b: common_vendor.o(($event) => $options.openPdf(item.file), index),
@@ -175,7 +186,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   } : {}, {
     J: $data.activeTab === "study"
   }, $data.activeTab === "study" ? {
-    K: common_vendor.f($data.university_list, (item, index, i0) => {
+    K: common_vendor.f($options.filteredUniversityList, (item, index, i0) => {
       return {
         a: index,
         b: common_vendor.o($options.openPdf, index),

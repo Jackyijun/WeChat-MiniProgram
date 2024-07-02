@@ -34,8 +34,8 @@
 		岗位类别
 		<uni-icons :type="dropdowns.position ? 'up' : 'down'" class="arrow-filter"/>
 		<view v-if="dropdowns.position" class="filter-dropdown-position">
-		  <view @tap="filterBy('position', 'fulltime')" :class="{'selected': filters.position === 'fulltime', 'filter-dropdown-item1': true}">全职</view>
-		  <view @tap="filterBy('position', 'internship')" :class="{'selected': filters.position === 'internship'}">实习</view>
+		  <view @tap="filterBy('position', '全职')" :class="{'selected': filters.position === '全职', 'filter-dropdown-item1': true}">全职</view>
+		  <view @tap="filterBy('position', '实习')" :class="{'selected': filters.position === '实习'}">实习</view>
 		</view>
 	  </view>
 	  <view class="filter" @tap="toggleDropdown('industry')">
@@ -70,7 +70,7 @@
 	<view v-if="activeTab === 'jobs'" class="mianjings">
 	  <scroll-view class="card-list" scroll-y>
 		  <card
-			v-for="(item, index) in company_list"
+			v-for="(item, index) in filteredCompanyList"
 			:key="index"
 			:image="item.image"
 			:title="item.title"
@@ -87,7 +87,7 @@
 	<view v-if="activeTab === 'study'" class="mianjings">
 		<scroll-view class="card-list" scroll-y>
 				  <card
-					v-for="(item, index) in university_list"
+					v-for="(item, index) in filteredUniversityList"
 					:key="index"
 					:image="item.image"
 					:title="item.title"
@@ -154,6 +154,18 @@ export default {
 	  university_list,
     };
   },
+  computed: {
+      filteredCompanyList() {
+        if (this.filters.position) {
+          return this.company_list.filter(item => item.tag === this.filters.position);
+        }
+        return this.company_list;
+      },
+      filteredUniversityList() {
+        // add filtering logic for university_list if needed
+        return this.university_list;
+      }
+    },
   methods: {
     searchToggleDropdown() {
       this.showDropdown = !this.showDropdown;
