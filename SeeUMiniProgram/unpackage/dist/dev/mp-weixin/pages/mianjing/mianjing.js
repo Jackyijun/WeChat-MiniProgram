@@ -36,6 +36,11 @@ const _sfc_main = {
     selectOption(option) {
       this.selectedOption = option;
       this.showDropdown = false;
+      if (option === "按专业" || option === "按学校") {
+        this.activeTab = "study";
+      } else {
+        this.activeTab = "jobs";
+      }
     },
     onSearch() {
       console.log("Search query:", this.searchQuery, "Selected option:", this.selectedOption);

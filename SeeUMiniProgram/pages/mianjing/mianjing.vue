@@ -133,6 +133,13 @@ export default {
     selectOption(option) {
       this.selectedOption = option;
       this.showDropdown = false;
+	  
+	  // Switch the activeTab based on selected option
+	  if (option === '按专业' || option === '按学校') {
+	          this.activeTab = 'study';
+	        } else {
+	          this.activeTab = 'jobs';
+	  }
     },
     onSearch() {
       // Handle search logic here
