@@ -82,10 +82,11 @@ const _sfc_main = {
       console.log("Navigating to:", page);
     },
     openPdf(file) {
-      console.log(file);
-      console.log(encodeURIComponent(file.path));
+      console.log("file data is ");
+      console.log(file.data);
+      console.log(encodeURIComponent(file));
       common_vendor.index.navigateTo({
-        url: `/pages/pdf-viewer/pdf-viewer?filePath=${encodeURIComponent(file.path)}`
+        url: `/pages/pdf-viewer/pdf-viewer?filePath=${encodeURIComponent(file)}`
       });
     }
   }

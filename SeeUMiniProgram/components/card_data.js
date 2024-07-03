@@ -65,6 +65,7 @@ const company_list =  [
   },
   // Add more items as needed
 ];
+
 const university_list =  [
   {
 	image: '/static/nyu.png',
@@ -114,7 +115,22 @@ const university_list =  [
   	views: 4697,
 	file: '/backend/pdfs/columbia.pdf',
   },
-  // Add more items as needed
+  {
+  	image: '/static/toronto.png',
+  	title: '多伦多大学面经',
+  	subtitle: '心理学',
+  	// tag: '实习',
+  	views: 3452,
+  	file: '/backend/pdfs/toronto.pdf',
+  },
+  {
+  	image: '/static/columbia.png',
+  	title: '哥伦比亚大学面经',
+  	subtitle: '应用分析学',
+  	// tag: '实习',
+  	views: 4697,
+  	file: '/backend/pdfs/columbia.pdf',
+  },
 ];
 
 export { company_list, university_list };

@@ -5,6 +5,7 @@
   align-items: center;
   padding-top: 20px;
   height: 100vh;
+  overflow: hidden; /* Prevent the whole page from scrolling */
   background-color: #ffffff;
 }
 .search-bar {
@@ -147,5 +148,10 @@
 .mianjings {
 	/* margin: 0; */
 	width: 95%;
+	overflow: hidden; /* Ensure the container does not scroll */
+}
+.card-list {
+  height: 100%; /* Make sure scroll-view takes up full height of parent */
+  overflow-y: scroll; /* Enable vertical scrolling */
 }
 

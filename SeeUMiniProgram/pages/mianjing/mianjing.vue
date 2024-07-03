@@ -86,17 +86,17 @@
 	<!-- 考研面经 -->
 	<view v-if="activeTab === 'study'" class="mianjings">
 		<scroll-view class="card-list" scroll-y>
-				  <card
-					v-for="(item, index) in filteredUniversityList"
-					:key="index"
-					:image="item.image"
-					:title="item.title"
-					:subtitle="item.subtitle"
-					:tag="item.tag"
-					:views="item.views"
-					:file="item.file"
-					@open-pdf="openPdf"
-				  />
+		  <card
+			v-for="(item, index) in filteredUniversityList"
+			:key="index"
+			:image="item.image"
+			:title="item.title"
+			:subtitle="item.subtitle"
+			:tag="item.tag"
+			:views="item.views"
+			:file="item.file"
+			@open-pdf="openPdf"
+		  />
 		</scroll-view>
 	</view>
 	
@@ -206,10 +206,11 @@ export default {
       console.log('Navigating to:', page);
     },
 	openPdf(file) {
-		console.log(file);
-		console.log(encodeURIComponent(file.path));
+		console.log("file data is ");
+		console.log(file.data);
+		console.log(encodeURIComponent(file));
 	    uni.navigateTo({
-	      url: `/pages/pdf-viewer/pdf-viewer?filePath=${encodeURIComponent(file.path)}`
+	      url: `/pages/pdf-viewer/pdf-viewer?filePath=${encodeURIComponent(file)}`
         });
 	},
   },
@@ -223,6 +224,7 @@ export default {
   align-items: center;
   padding-top: 20px;
   height: 100vh;
+  overflow: hidden; /* Prevent the whole page from scrolling */
   background-color: #ffffff;
 }
 
@@ -391,6 +393,12 @@ export default {
 .mianjings {
 	/* margin: 0; */
 	width: 95%;
+	overflow: hidden; /* Ensure the container does not scroll */
+}
+
+.card-list {
+  height: 100%; /* Make sure scroll-view takes up full height of parent */
+  overflow-y: scroll; /* Enable vertical scrolling */
 }
 
 </style>
