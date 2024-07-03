@@ -107,12 +107,42 @@ const _sfc_main = {
       this.activeNav = page;
       console.log("Navigating to:", page);
     },
-    openPdf(file) {
-      console.log("file data is ");
-      console.log(file.data);
-      console.log(encodeURIComponent(file));
+    fetchPdf(fileUrl) {
+      common_vendor.index.request({
+        url: "https://seeu-applets.seeu-edu.com/seeuapp/interview/download?id=004f125acb9a4d45912260499e14fe9d",
+        method: "GET",
+        responseType: "arraybuffer",
+        success: (res) => {
+          if (res.statusCode === 200) {
+            console.log("fetch successfully");
+            this.savePdf(res.data);
+          } else {
+            console.error("Failed to fetch PDF:", res);
+          }
+        },
+        fail: (err) => {
+          console.error("Request failed:", err);
+        }
+      });
+    },
+    savePdf(data) {
+      const filePath = `${common_vendor.index.env.USER_DATA_PATH}/temp.pdf`;
+      common_vendor.wx$1.getFileSystemManager().writeFile({
+        filePath,
+        data,
+        encoding: "binary",
+        success: () => {
+          console.log("PDF saved successfully");
+          this.navigateToPdfViewer(filePath);
+        },
+        fail: (err) => {
+          console.error("Failed to save PDF:", err);
+        }
+      });
+    },
+    navigateToPdfViewer(filePath) {
       common_vendor.index.navigateTo({
-        url: `/pages/pdf-viewer/pdf-viewer?filePath=${encodeURIComponent(file)}`
+        url: `/pages/pdf-viewer/pdf-viewer?filePath=${encodeURIComponent(filePath)}`
       });
     }
   }
@@ -198,7 +228,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     I: common_vendor.f($options.filteredCompanyList, (item, index, i0) => {
       return {
         a: index,
-        b: common_vendor.o(($event) => $options.openPdf(item.file), index),
+        b: common_vendor.o(($event) => $options.fetchPdf(item.file), index),
         c: "6c338c78-8-" + i0,
         d: common_vendor.p({
           image: item.image,
@@ -216,7 +246,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     K: common_vendor.f($options.filteredUniversityList, (item, index, i0) => {
       return {
         a: index,
-        b: common_vendor.o($options.openPdf, index),
+        b: common_vendor.o(($event) => $options.fetchPdf(item.file), index),
         c: "6c338c78-9-" + i0,
         d: common_vendor.p({
           image: item.image,
@@ -234,7 +264,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     M: common_vendor.f($data.searchResults, (item, index, i0) => {
       return {
         a: index,
-        b: common_vendor.o($options.openPdf, index),
+        b: common_vendor.o(($event) => $options.fetchPdf(item.file), index),
         c: "6c338c78-10-" + i0,
         d: common_vendor.p({
           title: item.subjectName,

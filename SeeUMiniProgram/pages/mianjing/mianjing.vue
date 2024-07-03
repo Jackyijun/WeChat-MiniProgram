@@ -78,7 +78,7 @@
 			:tag="item.tag"
 			:views="item.views"
 			:file="item.file"
-			@open-pdf="openPdf(item.file)"
+			@open-pdf="fetchPdf(item.file)"
 		  />
 	  </scroll-view>
 	</view>
@@ -95,7 +95,7 @@
 			:tag="item.tag"
 			:views="item.views"
 			:file="item.file"
-			@open-pdf="openPdf"
+			@open-pdf="fetchPdf(item.file)"
 		  />
 		</scroll-view>
 	</view>
@@ -111,7 +111,7 @@
 		  :tag="item.businessType"
 		  :views="item.views"  
 		  :file="item.interviewFile"
-		  @open-pdf="openPdf"
+		  @open-pdf="fetchPdf(item.file)"
 		/>
 	  </scroll-view>
 	</view>
@@ -248,13 +248,44 @@ export default {
       // Handle navigation logic here
       console.log('Navigating to:', page);
     },
-	openPdf(file) {
-		console.log("file data is ");
-		console.log(file.data);
-		console.log(encodeURIComponent(file));
-	    uni.navigateTo({
-	      url: `/pages/pdf-viewer/pdf-viewer?filePath=${encodeURIComponent(file)}`
-        });
+	fetchPdf(fileUrl) {
+	  uni.request({
+		url: "https://seeu-applets.seeu-edu.com/seeuapp/interview/download?id=004f125acb9a4d45912260499e14fe9d",
+		method: 'GET',
+		responseType: 'arraybuffer',
+		success: (res) => {
+		  if (res.statusCode === 200) {
+			console.log('fetch successfully')
+			this.savePdf(res.data);
+		  } else {
+			console.error('Failed to fetch PDF:', res);
+		  }
+		},
+		fail: (err) => {
+		  console.error('Request failed:', err);
+		}
+	  });
+	},
+	savePdf(data) {
+	  const filePath = `${uni.env.USER_DATA_PATH}/temp.pdf`;
+
+	  wx.getFileSystemManager().writeFile({
+		filePath: filePath,
+		data: data,
+		encoding: 'binary',
+		success: () => {
+		  console.log('PDF saved successfully');
+		  this.navigateToPdfViewer(filePath);
+		},
+		fail: (err) => {
+		  console.error('Failed to save PDF:', err);
+		}
+	  });
+	},
+	navigateToPdfViewer(filePath) {
+	  uni.navigateTo({
+		url: `/pages/pdf-viewer/pdf-viewer?filePath=${encodeURIComponent(filePath)}`
+	  });
 	},
   },
 };

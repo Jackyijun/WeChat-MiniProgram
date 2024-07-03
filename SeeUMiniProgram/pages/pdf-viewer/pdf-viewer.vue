@@ -12,9 +12,9 @@ export default {
         };
     },
     onLoad(options) {
-        if (options.file) {
-            this.pdfUrl = decodeURIComponent(options.file);
-        }
+		const filePath = decodeURIComponent(options.filePath);
+		console.log('Decoded file path:', filePath);
+		this.pdfUrl = filePath;
     }
 };
 </script>
