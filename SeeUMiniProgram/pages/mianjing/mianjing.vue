@@ -67,7 +67,7 @@
 	
 	<!-- 面经s Main Content (Scrollable)-->
 	<!-- 求职面经 -->
-	<view v-if="activeTab === 'jobs'" class="mianjings">
+	<view v-if="activeTab === 'jobs' && searchResults.length == 0" class="mianjings">
 	  <scroll-view class="card-list" scroll-y>
 		  <card
 			v-for="(item, index) in filteredCompanyList"
@@ -84,7 +84,7 @@
 	</view>
 	
 	<!-- 考研面经 -->
-	<view v-if="activeTab === 'study'" class="mianjings">
+	<view v-if="activeTab === 'study' && searchResults.length == 0" class="mianjings">
 		<scroll-view class="card-list" scroll-y>
 		  <card
 			v-for="(item, index) in filteredUniversityList"
@@ -99,6 +99,23 @@
 		  />
 		</scroll-view>
 	</view>
+	
+	<!-- Search Results -->
+	<view v-if="searchResults.length > 0" class="mianjings">
+	  <scroll-view class="card-list" scroll-y>
+		<card
+		  v-for="(item, index) in searchResults"
+		  :key="index"
+		  :title="item.subjectName"
+		  :subtitle="item.postMajorName"
+		  :tag="item.businessType"
+		  :views="item.views"  
+		  :file="item.interviewFile"
+		  @open-pdf="openPdf"
+		/>
+	  </scroll-view>
+	</view>
+	
 	
 	<!-- Bottom Navigation Bar -->
     <view class="bottom-nav">
@@ -152,6 +169,7 @@ export default {
       activeNav: 'info', // Set the active navigation item
 	  company_list,
 	  university_list,
+	  searchResults: [],
     };
   },
   computed: {
@@ -182,8 +200,33 @@ export default {
 	  }
     },
     onSearch() {
-      // Handle search logic here
-      console.log('Search query:', this.searchQuery, 'Selected option:', this.selectedOption);
+      const requestData = {
+              interviewName: '',
+              postMajorName: '',
+              subjectName: this.searchQuery,
+              industryType: '',
+              businessType: ''
+            }; // body
+      
+		uni.request({
+		  url: 'https://seeu-applets.seeu-edu.com/seeuapp/interview/listPage?pageNum=1&pageSize=1',
+		  method: 'POST',
+		  data: requestData,
+		  success: (res) => {
+			if (res.data.code === 200) {
+			  this.searchResults = res.data.data.records;
+			  console.log(this.searchResults)
+			  console.log(this.searchResults.length)
+			  console.log(this.searchResults[0].subjectName)
+			  console.log('hi')
+			} else {
+			  console.error('API Error:', res.data.message);
+			}
+		  },
+		  fail: (err) => {
+			console.error('Request Failed:', err);
+		  }
+		});
     },
     selectTab(tab) {
       this.activeTab = tab;

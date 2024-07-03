@@ -32,7 +32,8 @@ const _sfc_main = {
       activeNav: "info",
       // Set the active navigation item
       company_list: components_card_data.company_list,
-      university_list: components_card_data.university_list
+      university_list: components_card_data.university_list,
+      searchResults: []
     };
   },
   computed: {
@@ -60,7 +61,32 @@ const _sfc_main = {
       }
     },
     onSearch() {
-      console.log("Search query:", this.searchQuery, "Selected option:", this.selectedOption);
+      const requestData = {
+        interviewName: "",
+        postMajorName: "",
+        subjectName: this.searchQuery,
+        industryType: "",
+        businessType: ""
+      };
+      common_vendor.index.request({
+        url: "https://seeu-applets.seeu-edu.com/seeuapp/interview/listPage?pageNum=1&pageSize=1",
+        method: "POST",
+        data: requestData,
+        success: (res) => {
+          if (res.data.code === 200) {
+            this.searchResults = res.data.data.records;
+            console.log(this.searchResults);
+            console.log(this.searchResults.length);
+            console.log(this.searchResults[0].subjectName);
+            console.log("hi");
+          } else {
+            console.error("API Error:", res.data.message);
+          }
+        },
+        fail: (err) => {
+          console.error("Request Failed:", err);
+        }
+      });
     },
     selectTab(tab) {
       this.activeTab = tab;
@@ -167,8 +193,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     G: common_vendor.o(($event) => $options.toggleDropdown("major"))
   } : {}, {
-    H: $data.activeTab === "jobs"
-  }, $data.activeTab === "jobs" ? {
+    H: $data.activeTab === "jobs" && $data.searchResults.length == 0
+  }, $data.activeTab === "jobs" && $data.searchResults.length == 0 ? {
     I: common_vendor.f($options.filteredCompanyList, (item, index, i0) => {
       return {
         a: index,
@@ -185,8 +211,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       };
     })
   } : {}, {
-    J: $data.activeTab === "study"
-  }, $data.activeTab === "study" ? {
+    J: $data.activeTab === "study" && $data.searchResults.length == 0
+  }, $data.activeTab === "study" && $data.searchResults.length == 0 ? {
     K: common_vendor.f($options.filteredUniversityList, (item, index, i0) => {
       return {
         a: index,
@@ -203,24 +229,41 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       };
     })
   } : {}, {
-    L: common_vendor.p({
+    L: $data.searchResults.length > 0
+  }, $data.searchResults.length > 0 ? {
+    M: common_vendor.f($data.searchResults, (item, index, i0) => {
+      return {
+        a: index,
+        b: common_vendor.o($options.openPdf, index),
+        c: "6c338c78-10-" + i0,
+        d: common_vendor.p({
+          title: item.subjectName,
+          subtitle: item.postMajorName,
+          tag: item.businessType,
+          views: item.views,
+          file: item.interviewFile
+        })
+      };
+    })
+  } : {}, {
+    N: common_vendor.p({
       type: "home",
       size: "25"
     }),
-    M: common_vendor.o(($event) => $options.navigate("home")),
-    N: common_vendor.p({
+    O: common_vendor.o(($event) => $options.navigate("home")),
+    P: common_vendor.p({
       type: "help",
       size: "25",
       [","]: true,
       color: "#4285f4"
     }),
-    O: common_vendor.o(($event) => $options.navigate("info")),
-    P: $data.activeNav === "info" ? 1 : "",
-    Q: common_vendor.p({
+    Q: common_vendor.o(($event) => $options.navigate("info")),
+    R: $data.activeNav === "info" ? 1 : "",
+    S: common_vendor.p({
       type: "person",
       size: "25"
     }),
-    R: common_vendor.o(($event) => $options.navigate("profile"))
+    T: common_vendor.o(($event) => $options.navigate("profile"))
   });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/yil224/Documents/HBuilderProjects/SeeUMiniProgram/pages/mianjing/mianjing.vue"]]);
